@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://bpynwi74p76sk"]
+
+[ext_resource type="PackedScene" uid="uid://bhrjpsxb1f070" path="res://cenas/jogador/jogador.tscn" id="1_lsubs"]
+[ext_resource type="PackedScene" uid="uid://d0j8ek3j62pct" path="res://cenas/ui/ui_arma.tscn" id="1_y0euw"]
+[ext_resource type="Script" uid="uid://w2amg0fdy1kg" path="res://cenas/jogador/jogador.gd" id="2_0lymw"]
+[ext_resource type="PackedScene" uid="uid://dtc73qsde5ueb" path="res://cenas/coletaveis/moeda.tscn" id="3_p0hvy"]
+[ext_resource type="PackedScene" uid="uid://crh1bgckinotk" path="res://cenas/coletaveis/arma.tscn" id="5_y0euw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1fef"]
+size = Vector2(1302.5, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khhxn"]
+size = Vector2(62, 677.75)
+
+[node name="Fase_01" type="Node2D" unique_id=1768376228]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=860336658]
+
+[node name="Container" type="Control" parent="CanvasLayer" unique_id=595282590]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="UI_Arma" parent="CanvasLayer/Container" unique_id=20570561 instance=ExtResource("1_y0euw")]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 222.0
+offset_bottom = 148.0
+
+[node name="Jogador" parent="." unique_id=1488764174 instance=ExtResource("1_lsubs")]
+position = Vector2(93, 497)
+script = ExtResource("2_0lymw")
+
+[node name="Chao" type="StaticBody2D" parent="." unique_id=272261844]
+position = Vector2(565, 352)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao" unique_id=129179634]
+position = Vector2(83.75, 325)
+shape = SubResource("RectangleShape2D_s1fef")
+debug_color = Color(0.34852332, 0.1901915, 0.059035875, 0.41960785)
+
+[node name="ParedeInvisivel" type="StaticBody2D" parent="." unique_id=685623999]
+position = Vector2(-35, 302)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeInvisivel" unique_id=1161623984]
+shape = SubResource("RectangleShape2D_khhxn")
+
+[node name="ParedeInvisivel2" type="StaticBody2D" parent="." unique_id=604447990]
+position = Vector2(1320, 291)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeInvisivel2" unique_id=1294145483]
+shape = SubResource("RectangleShape2D_khhxn")
+
+[node name="Moeda" parent="." unique_id=2138186225 instance=ExtResource("3_p0hvy")]
+position = Vector2(315, 517)
+
+[node name="Moeda2" parent="." unique_id=1853643131 instance=ExtResource("3_p0hvy")]
+position = Vector2(564, 426)
+
+[node name="Moeda3" parent="." unique_id=1285521112 instance=ExtResource("3_p0hvy")]
+position = Vector2(715, 509)
+
+[node name="Moeda4" parent="." unique_id=1715621284 instance=ExtResource("3_p0hvy")]
+position = Vector2(922, 416)
+
+[node name="Moeda5" parent="." unique_id=336884281 instance=ExtResource("3_p0hvy")]
+position = Vector2(1034, 509)
+
+[node name="Arma" parent="." unique_id=226157206 instance=ExtResource("5_y0euw")]
+position = Vector2(1214, 483)
+
+[connection signal="atualizar_arma" from="Jogador" to="CanvasLayer/Container/UI_Arma" method="_on_jogador_atualizar_arma"]

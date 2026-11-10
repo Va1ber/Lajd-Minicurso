@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bhrjpsxb1f070"]
+
+[ext_resource type="Texture2D" uid="uid://clcohj0n2iso4" path="res://imagens/icon.svg" id="1_tm1li"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ismvl"]
+size = Vector2(120, 119)
+
+[node name="Jogador" type="CharacterBody2D" unique_id=1488764174 groups=["Jogador"]]
+collision_layer = 2
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=517766375]
+visibility_layer = 5
+texture = ExtResource("1_tm1li")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=676775567]
+shape = SubResource("RectangleShape2D_ismvl")

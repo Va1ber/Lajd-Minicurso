@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d0j8ek3j62pct"]
+
+[ext_resource type="Script" uid="uid://m2htcdrtqkfc" path="res://cenas/ui/ui_arma.gd" id="1_jllbd"]
+
+[node name="UI_Arma" type="HBoxContainer" unique_id=20570561]
+visible = false
+offset_left = 27.0
+offset_top = 22.0
+offset_right = 219.0
+offset_bottom = 150.0
+theme_override_constants/separation = 22
+script = ExtResource("1_jllbd")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=56236621]
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1270158979]
+layout_mode = 2
+text = "Arma Equipada"
