@@ -26,13 +26,9 @@ Dialogic="*uid://ds2q0uclmolvu"
 
 directories/dch_directory={}
 directories/dtl_directory={}
-layout/style_directory={
-"": "res://dialogos/styles/New_File.tres",
-"New_File": "res://dialogos/styles/New_File.tres",
-"New_File2": "res://dialogos/styles/New_File2.tres"
-}
+layout/style_directory={}
 glossary/default_case_sensitive=true
-layout/style_list=["res://dialogos/styles/New_File.tres", "res://dialogos/styles/New_File2.tres"]
+layout/style_list=[]
 layout/default_style="res://dialogos/styles/New_File.tres"
 variables={}
 text/letter_speed=0.01
@@ -73,7 +69,7 @@ translation/file_mode=1
 translation/translation_folder=""
 translation/save_mode=0
 translation/add_separator=false
-glossary/glossary_files=["uid://bgvr87ua0fun1"]
+glossary/glossary_files=[]
 
 [display]
 
@@ -144,6 +140,7 @@ locale/test="pt_BR"
 2d_physics/layer_3="Inimigo"
 2d_physics/layer_4="Coletavel"
 2d_physics/layer_5="Ataque_Jogador"
+2d_physics/layer_6="Ataque_Inimigo"
 
 [physics]
 

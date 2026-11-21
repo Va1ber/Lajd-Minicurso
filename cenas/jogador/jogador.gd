@@ -4,17 +4,20 @@ class_name Jogador
 @export var velocidade_movimento:int = 300
 @export var forca_pulo:int = 400
 
-@onready var sprite2D:Sprite2D = get_node("Sprite2D")
-
 var moedas:int = 0
 #Como é só para exercício vou simplificar as coisas dessa parte
 var arma_equipada:bool = false
 signal atualizar_arma(textura:Texture2D)
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var area_ataque: Area2D = $AreaAtaque
+@onready var sprite2D:Sprite2D = $Sprite2D
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("vui_pulo"):
 		pular()
 	elif event.is_action_pressed("vui_consumir_item"):
+		Dialogic.start("timeline")
 		consumir_item()
 	elif event.is_action_pressed("vui_ataque"):
 		atacar()
@@ -31,6 +34,7 @@ func movimentar():
 	if direction:
 		velocity.x = direction * velocidade_movimento
 		sprite2D.flip_h = direction < 0
+		area_ataque.scale.x = sign(direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0, velocidade_movimento)
 
@@ -44,8 +48,7 @@ func consumir_item():
 	print("Item Utilizado")
 
 func atacar():
-	if arma_equipada:
-		print("Ataque Realizado")
+	animation_player.play("jogador/atacar")
 	
 func aumentar_moedas(quant:int):
 	moedas += quant
@@ -54,3 +57,6 @@ func aumentar_moedas(quant:int):
 func equipar_arma(arma:Node2D):
 	arma_equipada = true 
 	atualizar_arma.emit(arma.get_node("Sprite2D").texture)
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	animation_player.play("jogador/esperar")

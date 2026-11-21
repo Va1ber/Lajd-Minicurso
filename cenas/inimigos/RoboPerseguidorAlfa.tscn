@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://4wecdt8em1in"]
+
+[ext_resource type="PackedScene" uid="uid://i75s2ws7er0p" path="res://cenas/inimigos/inimigoBase.tscn" id="2_ohvv8"]
+
+[node name="RoboPerseguidorAlfa" unique_id=979749054 instance=ExtResource("2_ohvv8")]

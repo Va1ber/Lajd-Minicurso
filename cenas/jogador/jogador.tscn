@@ -1,17 +1,157 @@
 [gd_scene format=3 uid="uid://bhrjpsxb1f070"]
 
-[ext_resource type="Texture2D" uid="uid://clcohj0n2iso4" path="res://imagens/icon.svg" id="1_tm1li"]
+[ext_resource type="Script" uid="uid://w2amg0fdy1kg" path="res://cenas/jogador/jogador.gd" id="1_ismvl"]
+[ext_resource type="Texture2D" uid="uid://b1obl14llkxks" path="res://imagens/sprites/Xef.png" id="2_ismvl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ismvl"]
-size = Vector2(120, 119)
+size = Vector2(11, 29)
+
+[sub_resource type="Animation" id="Animation_f84yp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ismvl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AreaAtaque/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xtf2f"]
+_data = {
+&"RESET": SubResource("Animation_f84yp")
+}
+
+[sub_resource type="Animation" id="Animation_tm1li"]
+
+[sub_resource type="Animation" id="Animation_ismvl"]
+resource_name = "ataque"
+length = 0.8571571811750531
+step = 0.14285715
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857146, 0.5714286, 0.71428573),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AreaAtaque/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2857143, 0.5714286),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_gaiqy"]
+
+[sub_resource type="Animation" id="Animation_nkbb3"]
+length = 1.200015047684312
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ismvl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857143, 0.5714286, 0.71428573, 0.85714287, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f84yp"]
+_data = {
+&"andar": SubResource("Animation_tm1li"),
+&"atacar": SubResource("Animation_ismvl"),
+&"coletar": SubResource("Animation_gaiqy"),
+&"esperar": SubResource("Animation_nkbb3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1fef"]
+size = Vector2(12, 27.749998)
 
 [node name="Jogador" type="CharacterBody2D" unique_id=1488764174 groups=["Jogador"]]
 collision_layer = 2
 collision_mask = 7
+script = ExtResource("1_ismvl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=676775567]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ismvl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=517766375]
 visibility_layer = 5
-texture = ExtResource("1_tm1li")
+texture = ExtResource("2_ismvl")
+hframes = 8
+vframes = 2
+frame = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=676775567]
-shape = SubResource("RectangleShape2D_ismvl")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1831577635]
+libraries/ = SubResource("AnimationLibrary_xtf2f")
+libraries/jogador = SubResource("AnimationLibrary_f84yp")
+autoplay = &"jogador/esperar"
+
+[node name="AreaAtaque" type="Area2D" parent="." unique_id=2135908512]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque" unique_id=1248262816]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_s1fef")
+disabled = true
+debug_color = Color(0.89479345, 0.29514426, 0.32907903, 0.41960785)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

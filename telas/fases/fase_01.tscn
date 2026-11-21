@@ -1,16 +1,23 @@
-[gd_scene format=3 uid="uid://bpynwi74p76sk"]
+[gd_scene format=4 uid="uid://bpynwi74p76sk"]
 
 [ext_resource type="PackedScene" uid="uid://bhrjpsxb1f070" path="res://cenas/jogador/jogador.tscn" id="1_lsubs"]
 [ext_resource type="PackedScene" uid="uid://d0j8ek3j62pct" path="res://cenas/ui/ui_arma.tscn" id="1_y0euw"]
-[ext_resource type="Script" uid="uid://w2amg0fdy1kg" path="res://cenas/jogador/jogador.gd" id="2_0lymw"]
 [ext_resource type="PackedScene" uid="uid://dtc73qsde5ueb" path="res://cenas/coletaveis/moeda.tscn" id="3_p0hvy"]
+[ext_resource type="Texture2D" uid="uid://djevaoham8uen" path="res://imagens/sprites/Tiles.png" id="5_e6l12"]
 [ext_resource type="PackedScene" uid="uid://crh1bgckinotk" path="res://cenas/coletaveis/arma.tscn" id="5_y0euw"]
+[ext_resource type="PackedScene" uid="uid://4wecdt8em1in" path="res://cenas/inimigos/RoboPerseguidorAlfa.tscn" id="6_e6l12"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1fef"]
-size = Vector2(1302.5, 92)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fyi13"]
+texture = ExtResource("5_e6l12")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_khhxn"]
-size = Vector2(62, 677.75)
+[sub_resource type="TileSet" id="TileSet_s1fef"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_fyi13")
 
 [node name="Fase_01" type="Node2D" unique_id=1768376228]
 
@@ -35,51 +42,33 @@ offset_right = 222.0
 offset_bottom = 148.0
 
 [node name="Jogador" parent="." unique_id=1488764174 instance=ExtResource("1_lsubs")]
-position = Vector2(93, 497)
-script = ExtResource("2_0lymw")
-
-[node name="Chao" type="StaticBody2D" parent="." unique_id=272261844]
-position = Vector2(565, 352)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao" unique_id=129179634]
-position = Vector2(83.75, 325)
-shape = SubResource("RectangleShape2D_s1fef")
-debug_color = Color(0.34852332, 0.1901915, 0.059035875, 0.41960785)
-
-[node name="ParedeInvisivel" type="StaticBody2D" parent="." unique_id=685623999]
-position = Vector2(-35, 302)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeInvisivel" unique_id=1161623984]
-shape = SubResource("RectangleShape2D_khhxn")
-
-[node name="ParedeInvisivel2" type="StaticBody2D" parent="." unique_id=604447990]
-position = Vector2(1320, 291)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeInvisivel2" unique_id=1294145483]
-shape = SubResource("RectangleShape2D_khhxn")
+position = Vector2(12, 111)
+velocidade_movimento = 45
+forca_pulo = 300
 
 [node name="Moeda" parent="." unique_id=2138186225 instance=ExtResource("3_p0hvy")]
-position = Vector2(315, 517)
+position = Vector2(63, 115)
 
 [node name="Moeda2" parent="." unique_id=1853643131 instance=ExtResource("3_p0hvy")]
-position = Vector2(564, 426)
+position = Vector2(122, 82)
 
 [node name="Moeda3" parent="." unique_id=1285521112 instance=ExtResource("3_p0hvy")]
-position = Vector2(715, 509)
+position = Vector2(166, 93)
 
 [node name="Moeda4" parent="." unique_id=1715621284 instance=ExtResource("3_p0hvy")]
-position = Vector2(922, 416)
+position = Vector2(181, 54)
 
 [node name="Moeda5" parent="." unique_id=336884281 instance=ExtResource("3_p0hvy")]
-position = Vector2(1034, 509)
+position = Vector2(260, 82)
 
 [node name="Arma" parent="." unique_id=226157206 instance=ExtResource("5_y0euw")]
-position = Vector2(1214, 483)
+position = Vector2(1133, 97)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=611623069]
+tile_map_data = PackedByteArray("AAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAUAAAAAAAAAAAAFAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_s1fef")
+
+[node name="RoboPerseguidorAlfa" parent="." unique_id=979749054 instance=ExtResource("6_e6l12")]
+position = Vector2(239, 55)
 
 [connection signal="atualizar_arma" from="Jogador" to="CanvasLayer/Container/UI_Arma" method="_on_jogador_atualizar_arma"]
