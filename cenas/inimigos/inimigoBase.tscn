@@ -3,6 +3,27 @@
 [ext_resource type="Script" uid="uid://q1pykjfkwf1t" path="res://cenas/inimigos/inimigo_base.gd" id="1_fg25t"]
 [ext_resource type="Texture2D" uid="uid://clcohj0n2iso4" path="res://imagens/icon.svg" id="1_ufgqy"]
 
+[sub_resource type="Animation" id="Animation_fg25t"]
+resource_name = "atacar"
+step = 0.14285715
+
+[sub_resource type="Animation" id="Animation_5n5wi"]
+resource_name = "esperar"
+
+[sub_resource type="Animation" id="Animation_bdl2l"]
+resource_name = "morrer"
+
+[sub_resource type="Animation" id="Animation_lndr2"]
+resource_name = "movimentar"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5n5wi"]
+_data = {
+&"atacar": SubResource("Animation_fg25t"),
+&"esperar": SubResource("Animation_5n5wi"),
+&"morrer": SubResource("Animation_bdl2l"),
+&"movimentar": SubResource("Animation_lndr2")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufgqy"]
 size = Vector2(20, 22)
 
@@ -14,6 +35,9 @@ collision_layer = 4
 script = ExtResource("1_fg25t")
 direcao = Vector2(-1, 0)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=761401195]
+libraries/Base = SubResource("AnimationLibrary_5n5wi")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2124690236]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ufgqy")
@@ -22,7 +46,7 @@ shape = SubResource("RectangleShape2D_ufgqy")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_ufgqy")
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1639692469]
+[node name="RayCastChao" type="RayCast2D" parent="." unique_id=1639692469]
 target_position = Vector2(18, 17)
 
 [node name="AreaAtaque" type="Area2D" parent="." unique_id=259795779]
@@ -32,3 +56,4 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque" unique_id=1426755965]
 position = Vector2(25, 0)
 shape = SubResource("RectangleShape2D_s1fef")
+debug_color = Color(0.9528076, 0.20070103, 0.23241627, 0.41960785)

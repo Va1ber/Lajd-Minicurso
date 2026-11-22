@@ -16,11 +16,12 @@ enum Estado{
 var estado_atual:Estado = Estado.Esperando
 var vida_atual:int
 
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var ray_cast_chao: RayCast2D = $RayCastChao
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	vida_atual = vida_maxima
-	if direcao.x < 0: ray_cast_2d.scale.x = -1
+	if direcao.x < 0: scale.x = -1
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -28,10 +29,10 @@ func _physics_process(delta: float) -> void:
 	if estado_atual == Estado.Morto: return
 	movimentar()
 	
-func movimentar():	
+func movimentar():
 	velocity.x = direcao.x * velocidade_movimento
 	move_and_slide()
 	
-	if !ray_cast_2d.is_colliding() or is_on_wall():
+	if !ray_cast_chao.is_colliding() or is_on_wall():
 		direcao.x *= -1
-		ray_cast_2d.scale.x *= -1
+		scale.x *= -1

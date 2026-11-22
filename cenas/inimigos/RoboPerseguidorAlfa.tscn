@@ -1,5 +1,85 @@
 [gd_scene format=3 uid="uid://4wecdt8em1in"]
 
+[ext_resource type="Script" uid="uid://bjtqdu6e3vigy" path="res://cenas/inimigos/robo_perseguidor_alfa.gd" id="2_b37os"]
 [ext_resource type="PackedScene" uid="uid://i75s2ws7er0p" path="res://cenas/inimigos/inimigoBase.tscn" id="2_ohvv8"]
 
+[sub_resource type="Animation" id="Animation_pfq4u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AreaAtaque/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfdsw"]
+_data = {
+&"RESET": SubResource("Animation_pfq4u")
+}
+
+[sub_resource type="Animation" id="Animation_b37os"]
+step = 0.14285715
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AreaAtaque/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2857143, 0.5714286),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ohvv8"]
+
+[sub_resource type="Animation" id="Animation_xtcs3"]
+
+[sub_resource type="Animation" id="Animation_8tpm6"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfq4u"]
+_data = {
+&"atacar": SubResource("Animation_b37os"),
+&"esperar": SubResource("Animation_ohvv8"),
+&"morrer": SubResource("Animation_xtcs3"),
+&"mover": SubResource("Animation_8tpm6")
+}
+
 [node name="RoboPerseguidorAlfa" unique_id=979749054 instance=ExtResource("2_ohvv8")]
+script = ExtResource("2_b37os")
+velocidade_patrulha = 30
+velocidade_perseguicao = 45
+
+[node name="AnimationPlayer" parent="." index="0" unique_id=761401195]
+libraries/ = SubResource("AnimationLibrary_yfdsw")
+libraries/Patrulhador = SubResource("AnimationLibrary_pfq4u")
+
+[node name="RayCastPerseguicao" type="RayCast2D" parent="." index="3" unique_id=453347191]
+target_position = Vector2(173, 0)
+collision_mask = 3
+
+[node name="TimerDuracaoPerseguicao" type="Timer" parent="." index="5" unique_id=172892230]
+one_shot = true
+
+[node name="TimerPatrulha" type="Timer" parent="." index="6" unique_id=1764674348]
+wait_time = 5.0
+one_shot = true
+
+[node name="TimerEsperar" type="Timer" parent="." index="7" unique_id=939388676]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" parent="AreaAtaque" parent_id_path=PackedInt32Array(259795779) index="0" unique_id=1426755965]
+disabled = true
+
+[connection signal="timeout" from="TimerDuracaoPerseguicao" to="." method="_on_timer_duracao_perseguicao_timeout"]
+[connection signal="timeout" from="TimerPatrulha" to="." method="_on_timer_patrulha_timeout"]
+[connection signal="timeout" from="TimerEsperar" to="." method="_on_timer_esperar_timeout"]
